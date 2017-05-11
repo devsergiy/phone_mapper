@@ -1,5 +1,6 @@
 require "phone_mapper/version"
 require "phone_mapper/lookup"
+require "phone_mapper/mapping"
 
 module PhoneMapper
   def self.lookup(phone)
