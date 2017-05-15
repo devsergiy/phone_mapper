@@ -35,5 +35,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
 
   spec.add_runtime_dependency "moneta"
+  spec.add_runtime_dependency "leveldb"
   spec.add_runtime_dependency "rubyzip"
 end

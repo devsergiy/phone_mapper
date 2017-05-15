@@ -11,11 +11,16 @@ module PhoneMapper
       9 => ["w", "x", "y", "z"],
     }
 
-    def self.letters_to_digits
+    @@letters_to_digits =
       LETTERS.inject({}) do |map, (k, v)|
         v.each {|letter| map[letter] = k }
         map
       end
+
+    def self.word_mapping(word)
+      word.downcase.split('').map do |letter|
+        @@letters_to_digits[letter]
+      end.join
     end
   end
 end

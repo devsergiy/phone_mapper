@@ -1,11 +1,10 @@
 require 'moneta'
-require 'json'
 
 module PhoneMapper
   class Dictionary
-    def initialize
-      @store = Moneta.new(:PStore, dir: '/tmp/moneta', file: 'dict')
+    def open
       @closed = false
+      @store = Moneta.new(:LevelDB, dir: 'data/dict')
     end
 
     def close
@@ -13,14 +12,19 @@ module PhoneMapper
       @store.close
     end
 
+    def clear
+      check_closed
+      @store.clear
+    end
+
     def put(key, value = [])
       check_closed
-      @store[key] = value.to_json
+      @store[key] = value
     end
 
     def get(key)
       check_closed
-      JSON.parse(store[key]) if store.key?('key')
+      @store[key]
     end
 
     private
