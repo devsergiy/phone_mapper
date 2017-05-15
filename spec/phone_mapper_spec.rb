@@ -28,6 +28,10 @@ RSpec.describe PhoneMapper do
       end
 
       it_behaves_like 'good mapper'
+
+      it 'skips partial matches' do
+        expect(PhoneMapper.lookup(phone)).not_to include(["NOUN", "PUPU"])
+      end
     end
 
     context 'phone 2282668687' do
@@ -46,16 +50,5 @@ RSpec.describe PhoneMapper do
 
       it_behaves_like 'good mapper'
     end
-
-    context 'phone 228266' do
-      let(:phone) { '228266' }
-      let(:result) do
-        [
-          ["ACT", "BOO"],
-          ["CAT", "COO"]
-        ]
-      end
-
-      it_behaves_like 'good mapper'
-    end  end
+  end
 end

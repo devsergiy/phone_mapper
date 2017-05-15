@@ -12,6 +12,11 @@ module PhoneMapper
       results = find_match(@phone)
       @dict.close
 
+      results.reject! do |mapping|
+        str = mapping.is_a?(Array) ? mapping.join : mapping
+        str.length < 10
+      end
+
       results
     end
 
