@@ -7,7 +7,12 @@ require "phone_mapper/mapping"
 
 module PhoneMapper
   def self.prepare_dictionary
-    PhoneMapper::DictionaryBuilder.new.prepare
+    if Dir.exists?('data/dict')
+      puts 'dict present'
+    else
+      puts 'creating dict'
+      PhoneMapper::DictionaryBuilder.new.prepare
+    end
   end
 
   def self.lookup(phone)
