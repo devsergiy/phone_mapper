@@ -7,21 +7,23 @@ RSpec.describe PhoneMapper do
 
   shared_examples 'good mapper' do
     it 'finds proper matches' do
-      expect(PhoneMapper.lookup(phone)).to eq(result)
+      result.each do |res|
+        expect(PhoneMapper.lookup(phone)).to include(res)
+      end
     end
   end
 
   context 'differrent data' do
     context 'phone 6686787825' do
-      let(:phone) { 6686787825 }
+      let(:phone) { '6686787825' }
       let(:result) do
         [
-          ["motor", "usual"],
-          ["noun", "struck"],
-          ["nouns", "truck"],
-          ["nouns", "usual"],
-          ["onto", "struck"],
-          "motortruck"
+          ["MOTOR", "USUAL"],
+          ["NOUN", "STRUCK"],
+          ["NOUNS", "TRUCK"],
+          ["NOUNS", "USUAL"],
+          ["ONTO", "STRUCK"],
+          "MOTORTRUCK"
         ]
       end
 
@@ -29,20 +31,31 @@ RSpec.describe PhoneMapper do
     end
 
     context 'phone 2282668687' do
-      let(:phone) { 2282668687 }
+      let(:phone) { '2282668687' }
       let(:result) do
         [
-          ["act", "amounts"],
-          ["act", "contour"],
-          ["acta", "mounts"],
-          ["bat", "amounts"],
-          ["bat", "contour"],
-          ["cat", "contour"],
-          "catamounts"
+          ["ACT", "AMOUNTS"],
+          ["ACT", "CONTOUR"],
+          ["ACTA", "MOUNTS"],
+          ["BAT", "AMOUNTS"],
+          ["BAT", "CONTOUR"],
+          ["CAT", "CONTOUR"],
+          "CATAMOUNTS"
         ]
       end
 
       it_behaves_like 'good mapper'
     end
-  end
+
+    context 'phone 228266' do
+      let(:phone) { '228266' }
+      let(:result) do
+        [
+          ["ACT", "BOO"],
+          ["CAT", "COO"]
+        ]
+      end
+
+      it_behaves_like 'good mapper'
+    end  end
 end

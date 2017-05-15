@@ -16,6 +16,7 @@ module PhoneMapper
   end
 
   def self.lookup(phone)
-    PhoneMapper::Lookup.new(phone).find_match
+    self.prepare_dictionary
+    PhoneMapper::Lookup.new(phone).matches
   end
 end
